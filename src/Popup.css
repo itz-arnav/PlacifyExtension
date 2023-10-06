@@ -1,0 +1,241 @@
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&display=swap');
+
+.App {
+  box-sizing: border-box;
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  text-align: center;
+  height: 100%;
+  width: 100%;
+  padding: 10px;
+  background: url("assets/img/5137894.jpg");
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 300ms ease-in-out;
+}
+
+.App:focus {
+  outline: none;
+}
+
+.container {
+  box-sizing: border-box;
+  width: 90%;
+  height: 100%;
+  max-height: 90%;
+  overflow: hidden;
+  border-radius: 1.5rem;
+
+  background: rgba(85, 85, 85, 0.5);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+
+  border: 1px solid rgba(255, 255, 255, 0.125);
+}
+
+.title {
+  color: #fff;
+  margin-top: 1.5rem;
+  margin-bottom: 1rem;
+  font-size: 2.3rem;
+  font-family: 'Merriweather', serif;
+  font-weight: bold;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: all 0.1s ease-in-out;
+}
+
+.title:hover {
+  color: #4361ee;
+}
+
+
+.scrollArea {
+  max-height: 62%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  margin-bottom: 1rem;
+}
+
+/*
+ *  STYLE 15
+ */
+
+.scrollArea::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+  background-color: rgb(11, 2, 32);
+  border-radius: 10px;
+}
+
+.scrollArea::-webkit-scrollbar {
+  width: 4px;
+  background-color: #070b20;
+}
+
+.scrollArea::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: #FFF;
+  background-image: -webkit-gradient(linear,
+      40% 0%,
+      75% 84%,
+      from(#4361ee),
+      to(#4361ee),
+      color-stop(.6, #4361ee))
+}
+
+.dataContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 1.7rem;
+}
+
+.data {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  width: 92%;
+  border-radius: 1rem;
+  padding: 0.4rem 0.7rem;
+  color: #fff;
+  background-color: #a4a4a48f;
+}
+
+
+.data:hover {
+  background-color: #4361ee;
+  cursor: pointer;
+}
+
+.data img {
+  width: 52px;
+  height: 52px;
+  background-color: #fff;
+  border-radius: 50%;
+  margin-left: 1rem;
+}
+
+.urlTitle {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  color: #fff;
+}
+
+.siteName {
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  color: #fff;
+}
+
+.siteAddress {
+  font-size: 0.8rem;
+  text-decoration: none;
+  color: #fff;
+}
+
+.contestName {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.contestName a {
+  text-decoration: none;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #fff;
+}
+
+.regDeadline {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.endsAt {
+  font-size: 0.75rem;
+  color: #e8e6e6;
+  font-weight: 400;
+}
+
+.endsDate {
+  font-weight: 500;
+  font-size: 0.85rem;
+}
+
+.tabContainer{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.tabs {
+  display: flex;
+  margin-bottom: 20px;
+  width: 98%;
+  border: 1px solid #ccc;
+}
+
+.tab {
+  width: 100%;
+  padding: 13px 20px;
+  cursor: pointer;
+  background-color: #ccc;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.tab.active {
+  background-color: #4361ee;
+  color: #fff;
+}
+
+.img {
+  width: 5%;
+}
+
+.companyTitle {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  width: 20%;
+}
+
+.urlTitle {
+  width: 40%;
+}
+
+.additionalInfo, .regDeadline {
+  width: 35%;
+}
+
+.companyName{
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.additionalInfo{
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.loading{
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 4rem;
+}
+
+.companyURL{
+  color: #e7e6e6;
+}
