@@ -7,6 +7,7 @@
 <h2>Project Screenshots:</h2>
 <h4>Dashboard:</h4>
 <img src="https://i.imgur.com/BqpmSQv.jpeg" alt="project-screenshot">
+<img src="https://i.imgur.com/X1twsyY.png" alt="project-screenshot">
 <br>
 <h4>Extension</h4>
 <img src="https://i.imgur.com/OPrFxVy.jpeg" alt="project-screenshot">
