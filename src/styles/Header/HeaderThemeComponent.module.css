@@ -1,0 +1,81 @@
+/* Body style */
+.bod {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(23, 23, 23);
+    transition: background-color 0.5s;
+}
+
+/* Container styles */
+.darksoulToggleContainer {
+    width: 300px;
+    height: 130px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 70px;
+    padding: 2px;
+    position: relative; /* Establish relative positioning context for absolute child */
+    box-shadow: 10px 10px 10px rgba(16, 16, 16, 0.667), 0px -8px 10px rgba(32, 32, 32, 0.453), -5px -5px 15px rgb(17, 17, 17) inset, 15px 15px 50px rgb(26, 26, 26) inset;
+    transition: all 0.2s;
+}
+
+.darksoulToggleBorder {
+    width: 100%;
+    height: 100%;
+    background-color: rgb(23, 23, 23);
+    box-shadow: 5px 5px 10px rgb(23, 23, 23) inset, -4px -10px 10px rgb(25, 25, 25) inset;
+    border-radius: 70px;
+    transition: all 0.2s;
+}
+
+.darksoulToggle {
+    width: 100px;
+    height: 100px;
+    background-color: rgb(23, 23, 23);
+    border-radius: 50%;
+    transition: box-shadow 0.25s, background-color 0.2s;
+    cursor: pointer;
+    position: absolute;
+    margin-left: 50px; /* Start from the left-most side initially */
+}
+
+/* Keyframe animations for the toggle */
+@keyframes roll {
+    from { margin-left: 0;
+    transform: rotate(0); }
+    to { margin-left: 200px;
+    transform: rotate(360deg); } 
+}
+
+@keyframes rollback {
+    from { margin-left: 200px; transform: rotate(360deg);}
+    to { margin-left: 0; transform: rotate(0);}
+}
+
+.toggleOn {
+    animation: roll 0.5s forwards;
+  }
+  
+  .toggleOff {
+    animation: rollback 0.5s forwards;
+  }
+
+.disclaimer {
+    color: #6a6a6a;
+    text-align: center;
+    font-size: 12px;
+    margin-top: 20px;
+}
+
+.disclaimer a {
+    text-decoration: none;
+    color: white;
+}
+
+.disclaimer a:hover {
+    font-weight: bolder;
+}

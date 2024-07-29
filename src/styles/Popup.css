@@ -1,0 +1,281 @@
+@import url(https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700;900&display=swap);
+
+.App {
+	align-items: center;
+	background: url(../assets/img/background.jpg);
+	bottom: 0;
+	box-sizing: border-box;
+	display: flex;
+	height: 100%;
+	justify-content: center;
+	left: 0;
+	padding: 10px;
+	position: absolute;
+	right: 0;
+	text-align: center;
+	top: 0;
+	transition: all .3s ease-in-out;
+	width: 100%
+}
+
+.App:focus {
+	outline: none
+}
+
+.container {
+	background: #282d34ac;
+	border: 1px solid hsla(0, 0%, 100%, .125);
+	border-radius: 1.5rem;
+	border-radius: 16px;
+	box-shadow: 0 4px 30px rgba(0, 0, 0, .1);
+	box-sizing: border-box;
+	height: 100%;
+	max-height: 90%;
+	overflow: hidden;
+	width: 90%
+}
+
+.placifyHeaderIcon {
+	cursor: pointer;
+	height: 3.5rem;
+	width: 3.5rem
+}
+
+.title {
+	align-items: center;
+	color: #fff;
+	cursor: pointer;
+	display: flex;
+	font-family: Merriweather, serif;
+	font-size: 1.9rem;
+	font-weight: 700;
+	gap: .8rem;
+	justify-content: center;
+	margin-bottom: 1rem;
+	margin-top: 1.5rem;
+	transition: all .1s ease-in-out
+}
+
+.titleText {
+	cursor: pointer;
+	margin-top: 5px;
+	text-transform: uppercase
+}
+
+.titleText:hover {
+	-webkit-text-fill-color: transparent;
+	-webkit-text-stroke: .5px hsla(0, 0%, 100%, .196);
+	background: linear-gradient(90deg, #f857a6, #ff5858);
+	-webkit-background-clip: text;
+	background-clip: text;
+	color: transparent
+}
+
+.scrollArea {
+	margin-bottom: 1rem;
+	max-height: 62%;
+	overflow-x: hidden;
+	overflow-y: auto
+}
+
+.scrollArea::-webkit-scrollbar-track {
+	background-color: #0b0220;
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .1)
+}
+
+.scrollArea::-webkit-scrollbar {
+	background-color: #070b20;
+	width: 4px
+}
+
+.scrollArea::-webkit-scrollbar-thumb {
+	background-color: #fff;
+	background-image: -webkit-gradient(linear, 40% 0, 75% 84%, from(#684dcc), to(#a13fb9), color-stop(.6, #8b44c0));
+	border-radius: 10px
+}
+
+.dataContainer {
+	flex-direction: column;
+	gap: .5rem;
+	justify-content: center;
+	margin-bottom: 1.7rem
+}
+
+.data,
+.dataContainer {
+	align-items: center;
+	display: flex
+}
+
+.data {
+	background-color: #383d42c8;
+	border-radius: 1rem;
+	color: #fff;
+	gap: 2rem;
+	padding: .7rem .9rem;
+	width: 92%
+}
+
+.data:hover {
+	background: linear-gradient(90deg, #684dcc, #744ac8, #8047c4, #8b44c0, #9642bc, #a13fb9);
+	cursor: pointer
+}
+
+.data img {
+	background-color: #fff;
+	border-radius: 8px;
+	height: 33px;
+	margin-left: 1rem;
+	width: 33px
+}
+
+.urlTitle {
+	color: #fff;
+	display: flex;
+	flex-direction: column;
+	gap: .2rem
+}
+
+.siteName {
+	font-size: .9rem;
+	font-weight: 500
+}
+
+.siteAddress,
+.siteName {
+	color: #fff;
+	text-decoration: none
+}
+
+.siteAddress {
+	font-size: .8rem
+}
+
+.contestName {
+	font-size: 1.15rem;
+	font-weight: 700;
+	margin-left: 1rem;
+	margin-right: 1rem
+}
+
+.contestName a {
+	color: #fff;
+	font-size: 1.1rem;
+	font-weight: 600;
+	text-decoration: none
+}
+
+.regDeadline {
+	display: flex;
+	flex-direction: column;
+	gap: .2rem
+}
+
+.endsAt {
+	color: #e8e6e6;
+	font-size: .75rem;
+	font-weight: 400
+}
+
+.endsDate {
+	font-size: .85rem;
+	font-weight: 500
+}
+
+.tabContainer {
+	align-items: center;
+	border-radius: 6px;
+	display: flex;
+	justify-content: center;
+	width: 100%
+}
+
+.tabs {
+	border: 1px solid #cccccc75;
+	border-radius: 6px;
+	margin-bottom: 20px;
+	overflow: hidden;
+	width: 95%
+}
+
+.tab,
+.tabs {
+	display: flex
+}
+
+.tab {
+	align-items: center;
+	background-color: #ccc;
+	cursor: pointer;
+	font-size: .9rem;
+	font-weight: 500;
+	gap: .5rem;
+	justify-content: center;
+	padding: 11px 20px;
+	width: 100%
+}
+
+.tab.active {
+	background-image: linear-gradient(90deg, #684dcc, #744ac8, #8047c4, #8b44c0, #9642bc, #a13fb9);
+	color: #fff
+}
+
+.img {
+	width: 1rem
+}
+
+.companyTitle {
+	display: flex;
+	flex-direction: column;
+	gap: .2rem;
+	width: 23%
+}
+
+.urlTitle {
+	width: 43%
+}
+
+.additionalInfo,
+.regDeadline {
+	width: 35%
+}
+
+.companyName {
+	font-size: .8rem;
+	font-weight: 500
+}
+
+.additionalInfo {
+	font-size: .8rem;
+	font-weight: 400
+}
+
+.loading {
+	font-size: 4rem;
+	left: 50%;
+	position: fixed;
+	top: 50%;
+	-webkit-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%)
+}
+
+.companyURL {
+	color: #e7e6e6;
+	font-weight: 300;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap
+}
+
+body {
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	box-sizing: border-box;
+	font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+	height: 550px;
+	margin: 0;
+	padding: 0;
+	position: relative;
+	width: 800px
+}

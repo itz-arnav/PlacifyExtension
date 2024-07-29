@@ -1,0 +1,12 @@
+
+/* Home Section - globals */
+
+/* Home Container */
+.homeContainer{
+    background-color: #171616;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}

@@ -1,0 +1,30 @@
+/* Header Logo and Text */
+.placifyDetailsContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 10px;
+    cursor: pointer; 
+    gap: 1px;
+}
+
+.placifyHeaderIcon {
+    width: 32px;
+    height: 32px;
+    object-fit: cover;
+}
+
+.placifyCompanyName {
+    color: #ffffff;
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    background: none;
+    margin-top: 3px;
+    transition: filter 300ms ease-in-out;
+    filter: brightness(0.9);
+}
+
+.placifyDetailsContainer:hover .placifyCompanyName {
+    filter: brightness(1);
+}

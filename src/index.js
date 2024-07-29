@@ -1,11 +1,14 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import Popup from './Popup';
+import React from "react";
+import { createRoot } from "react-dom/client";
+import App from "./components/App";
+import { AppStateProvider } from "./context/AppContext";
 import "./index.css";
 
-ReactDOM.render(
-  <React.StrictMode>
-    <Popup />
-  </React.StrictMode>,
-  document.getElementById('root')
+const container = document.getElementById("root");
+const root = createRoot(container);
+
+root.render(
+  <AppStateProvider>
+    <App />
+  </AppStateProvider>
 );
