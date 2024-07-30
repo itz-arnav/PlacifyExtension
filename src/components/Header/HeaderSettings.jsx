@@ -1,46 +1,48 @@
-import React, { useState } from "react";
+import React from "react";
 import { CiSettings } from "react-icons/ci";
-import { cn } from "../../utils/cl";
-import css from "../../styles/Header/HeaderSettings.module.css";
+import {
+  Dialog,
+  DialogContent,
+  DialogTrigger,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+  DialogFooter
+} from "../../components/ui/dialog";
 import { Button } from "../../components/ui/button";
 
 const HeaderSettings = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const handleOpenModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-  };
-
   return (
     <div className="relative">
-      {/* <Button variant="outline">Button</Button> */}
+      <Dialog>
+        {/* Trigger to open the dialog */}
+        <DialogTrigger asChild>
+          <CiSettings
+            className="text-gray-500 cursor-pointer hover:text-gray-700"
+            size={24}
+          />
+        </DialogTrigger>
 
-      {/* <CiSettings
-        className="text-gray-500 cursor-pointer hover:text-gray-700"
-        onClick={handleOpenModal}
-        size={24}
-      />
-      {isModalOpen && (
-        <Modal
-          onClose={handleCloseModal}
-          className="p-6 bg-white rounded-lg shadow-lg"
-        >
-          <h2 className="text-xl font-bold">Settings</h2>
-          <p className="mt-4 text-gray-600">
-            This is a basic modal dialog for settings.
-          </p>
-          <button
-            className="mt-6 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600"
-            onClick={handleCloseModal}
-          >
-            Close
-          </button>
-        </Modal>
-      )} */}
+        {/* Dialog Content */}
+        <DialogContent className="sm:max-w-[425px] p-6 bg-white rounded-lg shadow-lg">
+          <DialogHeader>
+            <DialogTitle>Settings</DialogTitle>
+            <DialogDescription>
+              Adjust your application settings here.
+            </DialogDescription>
+          </DialogHeader>
+
+          <div className="mt-4">
+            <p className="text-gray-600">
+              You can place any form or settings controls here.
+            </p>
+          </div>
+
+          <DialogFooter>
+            <Button variant="solid" onClick={() => document.body.removeChild(document.querySelector('#headlessui-dialog-portal'))}>Close</Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
