@@ -12,44 +12,30 @@ const HeaderThemeComponent = () => {
     setInitialStyles();
   }, []);
 
-  useEffect(() => {
-    toggleRef.current.addEventListener("click", handleToggle);
-    if (flag === 0) {
-      performToggleOff();
-    } else {
-      performToggleOn();
-    }
-    return () => {
-      // Clean up the event listener on component unmount
-      toggleRef.current.removeEventListener("click", handleToggle);
-    };
-  }, [flag]);
+  const handleToggle = () => {
+    setFlag((prevFlag) => {
+      const newFlag = prevFlag === 0 ? 1 : 0;
+      if (newFlag === 0) {
+        performToggleOff();
+      } else {
+        performToggleOn();
+      }
+      return newFlag;
+    });
+  };
 
-  function setInitialStyles() {
-    // Set initial styles for toggle and related elements
-    toggleRef.current.style.backgroundColor = "rgb(23, 23, 23)";
-    toggleRef.current.style.boxShadow =
-      "10px 10px 15px rgba(0, 0, 0, 0.312), -10px -10px 10px rgba(30, 30, 30, 0.696), 40px -5px 1px rgb(255, 255, 255) inset, -2px 5px 10px rgba(23, 23, 23, 0.986) inset";
-    borderRef.current.style.backgroundColor = "rgb(23, 23, 23)";
-    borderRef.current.style.boxShadow =
-      "5px 5px 10px rgb(23, 23, 23) inset, -4px -10px 10px rgb(25, 25, 25) inset";
-    bodRef.current.style.backgroundColor = "rgb(23, 23, 23)";
+  function performToggleOn() {
+    applyStylesForToggleOn();
   }
 
-  const handleToggle = () => {
-    setFlag((prevFlag) => (prevFlag === 0 ? 1 : 0));
-  };
-
-  const performToggleOn = () => {
-    applyStylesForToggleOn();
-  };
-
-  const performToggleOff = () => {
+  function performToggleOff() {
     applyStylesForToggleOff();
-  };
+  }
+
+  function setInitialStyles() {}
 
   function applyStylesForToggleOn() {
-    toggleRef.current.className = css.darksoulToggle + " " + css.toggleOn;
+    toggleRef.current.className = `${css.darksoulToggle} ${css.toggleOn}`;
 
     containerRef.current.style.boxShadow =
       "10px 10px 10px rgb(242, 241, 241), -4px -7px 15px rgb(242, 241, 241), 2px -5px 10px rgb(255, 255, 255) inset, -10px -1px 5px yellow inset";
@@ -66,7 +52,7 @@ const HeaderThemeComponent = () => {
   }
 
   function applyStylesForToggleOff() {
-    toggleRef.current.className = css.darksoulToggle + " " + css.toggleOff;
+    toggleRef.current.className = `${css.darksoulToggle} ${css.toggleOff}`;
 
     containerRef.current.style.boxShadow =
       "10px 10px 10px rgba(16, 16, 16, 0.667), 0px -8px 10px rgba(32, 32, 32, 0.453), -5px -5px 15px rgb(17, 17, 17) inset, 15px 15px 50px rgb(26, 26, 26) inset";
@@ -76,17 +62,23 @@ const HeaderThemeComponent = () => {
     bodRef.current.style.backgroundColor = "rgb(23, 23, 23)";
     setTimeout(() => {
       toggleRef.current.style.boxShadow =
-        "10px 10px 15px rgba(0, 0, 0, 0.312), -10px -10px 10px rgba(30, 30, 30, 0.696), 40px -5px 1px rgb(255, 255, 255) inset,  -2px 5px 10px rgba(23, 23, 23, 0.986) inset";
-      toggleRef.current.style.border = "1px solid rgba(28, 28, 28, 0)";
+        "8px 8px 10px rgba(0, 0, 0, 0.3), " + // Outer dark shadow for depth
+        "-4px -4px 8px rgba(30, 30, 30, 0.5), " + // Inner dark shadow for contour
+        "20px -2.5px 0.5px rgb(255, 255, 255) inset, " + // Bright edge to simulate lighting
+        "-1px 2.5px 5px rgba(23, 23, 23, 0.5) inset"; // Subtle inner depth      toggleRef.current.style.border = "1px solid rgba(28, 28, 28, 0)";
       toggleRef.current.style.backgroundColor = "rgb(23, 23, 23)";
     }, 50);
   }
 
   return (
     <div ref={bodRef} className={css.bod}>
-      <div ref={containerRef} className={css.darksoulToggleContainer}>
+      <div
+        ref={containerRef}
+        className={css.darksoulToggleContainer}
+        onClick={handleToggle}
+      >
         <div ref={borderRef} className={css.darksoulToggleBorder}>
-          <div ref={toggleRef} className={`${css.darksoulToggle} ${css.toggleOff}`}></div>
+          <div ref={toggleRef} className={css.darksoulToggle}></div>
         </div>
       </div>
     </div>

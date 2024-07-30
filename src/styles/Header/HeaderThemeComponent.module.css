@@ -1,81 +1,85 @@
 /* Body style */
 .bod {
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    background-color: rgb(23, 23, 23);
-    transition: background-color 0.5s;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(5, 5, 5); /* Very dark background */
+  transition: background-color 0.5s;
 }
 
 /* Container styles */
 .darksoulToggleContainer {
-    width: 300px;
-    height: 130px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 70px;
-    padding: 2px;
-    position: relative; /* Establish relative positioning context for absolute child */
-    box-shadow: 10px 10px 10px rgba(16, 16, 16, 0.667), 0px -8px 10px rgba(32, 32, 32, 0.453), -5px -5px 15px rgb(17, 17, 17) inset, 15px 15px 50px rgb(26, 26, 26) inset;
-    transition: all 0.2s;
+  width: 110px; /* Adjusted width as per your requirement */
+  height: 50px; /* Height as requested */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px; /* Slight curve on the edges */
+  padding: 2px;
+  position: relative; /* Necessary for absolute positioning of the toggle */
+  box-shadow: 10px 10px 10px rgba(191, 185, 185, 0.667),
+    0px -8px 10px rgba(9, 9, 9, 0.453), -5px -5px 15px rgb(17, 17, 17) inset,
+    15px 15px 50px rgb(26, 26, 26) inset;
+  transition: all 0.2s;
+  cursor: pointer;
 }
 
 .darksoulToggleBorder {
-    width: 100%;
-    height: 100%;
-    background-color: rgb(23, 23, 23);
-    box-shadow: 5px 5px 10px rgb(23, 23, 23) inset, -4px -10px 10px rgb(25, 25, 25) inset;
-    border-radius: 70px;
-    transition: all 0.2s;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(23, 23, 23); /* Dark grey color for the border area */
+  box-shadow: 5px 5px 10px rgb(23, 23, 23) inset,
+    -4px -10px 10px rgb(25, 25, 25) inset;
+  border-radius: 15px;
+  transition: all 0.2s;
 }
 
 .darksoulToggle {
-    width: 100px;
-    height: 100px;
-    background-color: rgb(23, 23, 23);
-    border-radius: 50%;
-    transition: box-shadow 0.25s, background-color 0.2s;
-    cursor: pointer;
-    position: absolute;
-    margin-left: 50px; /* Start from the left-most side initially */
+  width: 45px;  /* Smaller size as specified */
+  height: 45px;  /* Smaller size as specified */
+  background-color: rgb(23, 23, 23);
+  border-radius: 50%;  /* Ensures it's perfectly circular */
+  border: 1px solid rgba(28, 28, 28, 0);  /* Maintains the border style from the larger example */
+  transition: box-shadow 1s;  /* Smooth transition for the shadow */
+  position: absolute;
+  margin-left: 0;  /* Reset initial margin left, center it as needed in your layout */
+  box-shadow: 
+    8px 8px 10px rgba(0, 0, 0, 0.3),  /* Outer dark shadow for depth */
+    -4px -4px 8px rgba(30, 30, 30, 0.5),  /* Inner dark shadow for contour */
+    20px -2.5px 0.5px rgb(255, 255, 255) inset,  /* Bright edge to simulate lighting */
+    -1px 2.5px 5px rgba(23, 23, 23, 0.5) inset;  /* Subtle inner depth */
 }
+
 
 /* Keyframe animations for the toggle */
 @keyframes roll {
-    from { margin-left: 0;
-    transform: rotate(0); }
-    to { margin-left: 200px;
-    transform: rotate(360deg); } 
+  from {
+    margin-left: 0;
+    transform: rotate(0);
+  }
+  to {
+    margin-left: 65px; /* Adjusted for the new width to properly animate across */
+    transform: rotate(360deg);
+  }
 }
 
 @keyframes rollback {
-    from { margin-left: 200px; transform: rotate(360deg);}
-    to { margin-left: 0; transform: rotate(0);}
+  from {
+    margin-left: 65px; /* Adjusted for the new width */
+    transform: rotate(360deg);
+  }
+  to {
+    margin-left: 0;
+    transform: rotate(0);
+  }
 }
 
 .toggleOn {
-    animation: roll 0.5s forwards;
-  }
-  
-  .toggleOff {
-    animation: rollback 0.5s forwards;
-  }
-
-.disclaimer {
-    color: #6a6a6a;
-    text-align: center;
-    font-size: 12px;
-    margin-top: 20px;
+  animation: roll 0.5s forwards; /* Forward animation for turning toggle on */
 }
 
-.disclaimer a {
-    text-decoration: none;
-    color: white;
-}
-
-.disclaimer a:hover {
-    font-weight: bolder;
+.toggleOff {
+  animation: rollback 0.5s forwards; /* Reverse animation for turning toggle off */
 }
