@@ -1,47 +1,29 @@
-import React from "react";
+import React, { useState } from "react";
 import { CiSettings } from "react-icons/ci";
-import {
-  Dialog,
-  DialogContent,
-  DialogTrigger,
-  DialogHeader,
-  DialogTitle,
-  DialogDescription,
-  DialogFooter
-} from "../../components/ui/dialog";
-import { Button } from "../../components/ui/button";
+import { Dialog, DialogTrigger } from "../../components/ui/dialog";
+import SettingsDialog from "../Settings/SettingsDialog"; // Import the new SettingsDialog component
+import css from "../../styles/Header/HeaderSettings.module.css"; // Ensure the path is correct, also remove double slashes
+import { useAppContext } from "../../context/AppContext"; // Import the theme context
 
 const HeaderSettings = () => {
+  const { theme } = useAppContext(); // Assuming theme is stored in this context
+  const [isOpen, setIsOpen] = useState(false);
+  const isDarkMode = theme === 'dark'; // Check if the current theme is 'dark'
+ 
   return (
     <div className="relative">
-      <Dialog>
+      <Dialog open={isOpen} onOpenChange={setIsOpen} className={css.dialogContainer}>
         {/* Trigger to open the dialog */}
         <DialogTrigger asChild>
           <CiSettings
-            className="text-gray-500 cursor-pointer hover:text-gray-700"
+            className={`${css.settingsIcon} ${isDarkMode ? css.darkTheme : ''}`}
             size={24}
+            onClick={() => setIsOpen(true)}
           />
         </DialogTrigger>
 
-        {/* Dialog Content */}
-        <DialogContent className="sm:max-w-[425px] p-6 bg-white rounded-lg shadow-lg">
-          <DialogHeader>
-            <DialogTitle>Settings</DialogTitle>
-            <DialogDescription>
-              Adjust your application settings here.
-            </DialogDescription>
-          </DialogHeader>
-
-          <div className="mt-4">
-            <p className="text-gray-600">
-              You can place any form or settings controls here.
-            </p>
-          </div>
-
-          <DialogFooter>
-            <Button variant="solid" onClick={() => document.body.removeChild(document.querySelector('#headlessui-dialog-portal'))}>Close</Button>
-          </DialogFooter>
-        </DialogContent>
+        {/* Settings Dialog Component */}
+        <SettingsDialog isOpen={isOpen} onOpenChange={setIsOpen} />
       </Dialog>
     </div>
   );

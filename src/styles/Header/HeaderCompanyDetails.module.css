@@ -3,9 +3,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-left: 10px;
-    cursor: pointer; 
-    gap: 1px;
+    margin-left: 15px;
+    cursor: pointer;
+    gap: 2px;
 }
 
 .placifyHeaderIcon {
@@ -15,16 +15,24 @@
 }
 
 .placifyCompanyName {
-    color: #ffffff;
-    font-size: 16px;
+    color: #000;
+    font-size: 20px;
+    font-family: "Poppins", sans-serif;
     font-weight: 600;
-    letter-spacing: 1.5px;
     background: none;
     margin-top: 3px;
-    transition: filter 300ms ease-in-out;
-    filter: brightness(0.9);
+    transition: color 300ms ease-in-out;
+}
+
+.placifyCompanyName.darkTheme {
+    color: #eee;
+    filter: brightness(1);
 }
 
 .placifyDetailsContainer:hover .placifyCompanyName {
-    filter: brightness(1);
+    color: #555;
+}
+
+.placifyDetailsContainer.darkTheme:hover .placifyCompanyName.darkTheme {
+    color: #aaa;
 }

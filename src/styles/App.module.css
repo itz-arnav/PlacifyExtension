@@ -1,12 +1,15 @@
-
 /* Home Section - globals */
 
 /* Home Container */
-.homeContainer{
-    background-color: #171616;
+.homeContainer {
     width: 100vw;
     height: 100vh;
     display: flex;
     align-items: center;
     flex-direction: column;
+    border-bottom: 1px solid #323232;
+}
+
+.homeContainer.darkTheme {
+    background-color: #171616;
 }

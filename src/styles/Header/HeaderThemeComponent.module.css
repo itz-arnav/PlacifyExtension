@@ -1,67 +1,7 @@
-/* Container styles */
-.darksoulToggleContainer {
-  width: 70px;
-  height: 30px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 15px;
-  padding: 2px;
-  position: relative;
-  box-shadow: 5px 5px 5px rgba(68, 68, 68, 0.667),
-    0px -4px 5px rgba(9, 9, 9, 0.453),
-    -2.5px -2.5px 7.5px rgb(17, 17, 17) inset,
-    7.5px 7.5px 25px rgb(26, 26, 26) inset;
-  transition: all 0.2s;
-  cursor: pointer;
+.themeComponentContainer {
+  gap: 2px;
 }
 
-.darksoulToggle {
-  width: 20px;
-  height: 20px;
-  background-color: rgb(23, 23, 23);
-  border-radius: 50%;
-  border: 1px solid rgba(28, 28, 28, 0);
-  transition: box-shadow 1s;
-  position: absolute;
-  margin-left: 0;
-  box-shadow:
-    4px 4px 5px rgba(0, 0, 0, 0.3),
-    -2px -2px 4px rgba(30, 30, 30, 0.5),
-    10px -1.25px 0.25px rgb(255, 255, 255) inset,
-    -0.5px 1.25px 2.5px rgba(23, 23, 23, 0.5) inset;
-}
-
-/* Keyframe animations for the toggle */
-@keyframes roll {
-  from {
-    margin-left: 0;
-    transform: rotate(0);
-  }
-
-  to {
-    margin-left: 50px;
-    /* Adjusted to fit within the new container width */
-    transform: rotate(360deg);
-  }
-}
-
-@keyframes rollback {
-  from {
-    margin-left: 50px;
-    transform: rotate(360deg);
-  }
-
-  to {
-    margin-left: 0;
-    transform: rotate(0);
-  }
-}
-
-.toggleOn {
-  animation: roll 0.5s forwards;
-}
-
-.toggleOff {
-  animation: rollback 0.5s forwards;
+.themeIcon {
+  font-size: 18px;
 }
