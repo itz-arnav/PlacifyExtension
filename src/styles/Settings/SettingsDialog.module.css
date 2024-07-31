@@ -1,4 +1,19 @@
-.dialogContent {
+/* SettingsDialog.module.css */
+.dialogContainer {
     width: 90% !important;
+    /* Maintain the desired sizing */
     height: 90%;
+    /* Maintain the desired sizing */
+}
+
+.darkTheme {
+    background-color: #171616 !important;
+    color: #fff;
+}
+
+.darkTheme input,
+.darkTheme select,
+.darkTheme textarea {
+    color: #eee;
+    border-color: #333;
 }
