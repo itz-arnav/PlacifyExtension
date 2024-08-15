@@ -1,0 +1,46 @@
+.titleHeader {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.subtitleHeader {
+    color: #6b7280;
+    font-size: 14px;
+    margin-top: -1px;
+}
+
+.radioContainer {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 3px;
+    margin-top: 3px;
+}
+
+.radioInput {
+    display: block;
+    height: 30px;
+    width: 30px;
+    padding: 3px;
+    border-radius: 999px;
+    border: 2px solid transparent;
+    background: var(--current-color);
+    background-clip: content-box;
+    text-align: center;
+    align-content: center;
+    font-family: calibri;
+    color: white;
+    cursor: pointer;
+    appearance: none;
+    outline: none;
+}
+
+.radioInput:checked {
+    border-color: var(--current-color);
+    outline: none;
+}
+
+.radioLabel {
+    display: block;
+    cursor: pointer;
+}
+

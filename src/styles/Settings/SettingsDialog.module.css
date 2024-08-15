@@ -1,19 +1,107 @@
-/* SettingsDialog.module.css */
 .dialogContainer {
     width: 90% !important;
-    /* Maintain the desired sizing */
     height: 90%;
-    /* Maintain the desired sizing */
+    user-select: none !important;
 }
 
-.darkTheme {
+.dialogTitle {
+    font-size: 20px !important;
+}
+
+.dialogDescription {
+    font-size: 16px !important;
+}
+
+.themeDark {
     background-color: #171616 !important;
     color: #fff;
 }
 
-.darkTheme input,
-.darkTheme select,
-.darkTheme textarea {
+/* .themeDark input,
+.themeDark select,
+.themeDark textarea {
     color: #eee;
     border-color: #333;
+} */
+
+.headerHeight {
+    height: 30px;
+}
+
+.horizontalMargin {
+    width: 100%;
+    height: 1px;
+    background-color: #d2d2d280;
+}
+
+.horizontalMarginDark {
+    background-color: #6b728037;
+}
+
+.contentArea {
+    min-height: 350px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: -20px;
+}
+
+.titleHeader {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.subtitleHeader {
+    color: #6b7280;
+    font-size: 14px;
+    margin-top: -1px;
+}
+
+
+
+/* Footer Section */
+.footerContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.buttonContainer {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.resetButton {
+    font-weight: 500;
+    font-size: 14px;
+    padding: 5px 10px;
+    background-color: transparent;
+    border: 1px solid #17161685;
+    border-radius: 4px;
+    color: #171616;
+    transition: all 100ms ease-in-out;
+}
+
+.resetButton:hover {
+    filter: brightness(1.1);
+}
+
+.resetButton.themeDark {
+    border-color: #ffffff54 !important;
+    color: #fff;
+}
+
+.saveButton {
+    font-weight: 500;
+    font-size: 14px;
+    padding: 5px 10px;
+    border-radius: 4px;
+    color: #fff;
+    background-color: var(--accent-color) !important;
+    transition: all 100ms ease-in-out;
+}
+
+.saveButton:hover {
+    filter: brightness(0.9);
 }

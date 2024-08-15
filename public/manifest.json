@@ -17,6 +17,7 @@
     "128": "128.png"
   },
   "permissions": [
-    "tabs"
+    "tabs",
+    "storage"
   ]
 }

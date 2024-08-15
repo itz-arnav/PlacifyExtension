@@ -1,0 +1,118 @@
+.titleHeader {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.subtitleHeader {
+    color: #6b7280;
+    font-size: 14px;
+    margin-top: -1px;
+
+}
+
+.postFilterWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 19px;
+    margin-top: 4px;
+    width: 100%;
+}
+
+.postFilterContainer {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.postLabelDesc {
+    color: #232323;
+    font-size: 12.5px;
+}
+
+.postLabelDesc.themeDark {
+    color: #ddd;
+}
+
+.sliderWrapper {
+    display: flex;
+    gap: 9px;
+    align-items: center;
+    justify-content: space-around;
+}
+
+/* Slider styling */
+
+.inputRangeSlider {
+    -webkit-appearance: none;
+    appearance: none;
+    height: 5px;
+    background: linear-gradient(to right, var(--accent-color) var(--value, 0%), #ccc var(--value, 0%));
+    border-radius: 5px;
+    outline: none;
+}
+
+.inputRangeSlider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    background: var(--accent-color);
+    height: 13px;
+    width: 13px;
+    border-radius: 50%;
+    cursor: pointer;
+    margin-top: -1px;
+}
+
+.inputRangeText {
+    width: 60px;
+    border: 1px solid #000000b4;
+    border-radius: 4px;
+    padding: 3px 5px;
+    font-weight: 500;
+    font-size: 12px;
+}
+
+.inputRangeText.themeDark {
+    color: #fff;
+    background-color: transparent;
+    border-color: #ffffffa7;
+}
+
+.inputRangeText::-webkit-outer-spin-button,
+.inputRangeText::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+.inputRangeText {
+    -moz-appearance: textfield;
+    appearance: textfield;
+}
+
+.batchList {
+    display: flex;
+    list-style: none;
+    gap: 7px;
+    align-items: center;
+}
+
+.batchListItem {
+    padding: 3px 5px;
+    border: 1px solid #232323a6;
+    border-radius: 4px;
+    font-size: 12px;
+}
+
+.batchListItem.themeDark {
+    border-color: #ffffffab !important;
+}
+
+.batchListItem:hover {
+    cursor: pointer;
+}
+
+.batchListItem.batchSelected {
+    border-width: 2px;
+    border-color: var(--accent-color) !important;
+}

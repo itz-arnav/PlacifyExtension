@@ -3,16 +3,18 @@ import React, { createContext, useContext, useState, useEffect, useMemo } from '
 const AppContext = createContext(undefined);
 
 export const AppProvider = ({ children }) => {
-  // State for tracking whether the data is loading
   const [isLoading, setIsLoading] = useState(true);
-  // State for storing user data fetched from API
   const [userData, setUserData] = useState(null);
-  // State for managing the theme, initializing from local storage or default to 'light'
+  // Initialize 'theme' directly from local storage or default to 'light'
   const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'light');
-  // State for managing user's chosen color
-  const [chosenColor, setChosenColor] = useState(() => localStorage.getItem('color') || 'blue');
+  const [chosenColor, setChosenColor] = useState(() => localStorage.getItem('chosenColor') || '#8338ec');
+  // Initialize 'userTheme' from local storage or default to 'system'
+  const [userTheme, setUserTheme] = useState(() => localStorage.getItem('userTheme') || theme);
+  // For filters related to job posts
+  const [minSalaryFilter, setMinSalaryFilter] = useState(() => localStorage.getItem('minSalaryFilter') || 0);
+  const [batchFilter, setBatchFilter] = useState(() => localStorage.getItem('batchFilter') || 'Any');
 
-  // Effect to fetch user data from an API
+  // Fetch user data from an API
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -28,20 +30,65 @@ export const AppProvider = ({ children }) => {
     fetchData();
   }, []);
 
-  // Effect to save the theme to local storage whenever it changes
+  // Save the theme and chosen color to local storage whenever they change
   useEffect(() => {
     localStorage.setItem('theme', theme);
   }, [theme]);
 
-  // Effect to save the chosen color to local storage whenever it changes
   useEffect(() => {
-    localStorage.setItem('color', chosenColor);
+    localStorage.setItem('chosenColor', chosenColor);
   }, [chosenColor]);
+
+  useEffect(() => {
+    localStorage.setItem('minSalaryFilter', minSalaryFilter);
+  }, [minSalaryFilter]);
+
+  useEffect(() => {
+    localStorage.setItem('batchFilter', batchFilter);
+  }, [batchFilter]);
+
+  // Respond to changes in 'userTheme' and adjust 'theme' accordingly
+  useEffect(() => {
+    localStorage.setItem('userTheme', userTheme);
+    const handleSystemThemeChange = (e) => {
+      if (userTheme === 'system') {
+        const newSystemTheme = e.matches ? 'dark' : 'light';
+        setTheme(newSystemTheme);
+      }
+    };
+
+    if (userTheme === 'system') {
+      const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const systemTheme = prefersDarkMode ? 'dark' : 'light';
+      setTheme(systemTheme);
+      const matchMedia = window.matchMedia('(prefers-color-scheme: dark)');
+      matchMedia.addListener(handleSystemThemeChange);
+
+      return () => {
+        matchMedia.removeListener(handleSystemThemeChange);
+      };
+    } else {
+      setTheme(userTheme);
+    }
+  }, [userTheme]);
 
   // Function to toggle the theme between 'light' and 'dark'
   const toggleTheme = () => {
-    setTheme(prevTheme => (prevTheme === 'light' ? 'dark' : 'light'));
+    if (userTheme === 'system') {
+      setUserTheme(theme === 'light' ? 'dark' : 'light');
+    } else if (userTheme === 'light') {
+      setUserTheme('dark');
+    } else {
+      setUserTheme('light');
+    }
   };
+
+  const resetSettings = () => {
+    setUserTheme('system');
+    setMinSalaryFilter(0);
+    setBatchFilter('Any');
+    setChosenColor('#8338ec');
+  }
 
   // Prepare context value with useMemo to optimize performance
   const value = useMemo(() => ({
@@ -52,8 +99,15 @@ export const AppProvider = ({ children }) => {
     setUserData,
     setTheme,
     setChosenColor,
-    toggleTheme
-  }), [isLoading, userData, theme, chosenColor]);
+    toggleTheme,
+    userTheme,
+    setUserTheme,
+    minSalaryFilter,
+    setMinSalaryFilter,
+    batchFilter,
+    setBatchFilter,
+    resetSettings
+  }), [isLoading, userData, theme, chosenColor, userTheme, minSalaryFilter, batchFilter]);
 
   return (
     <AppContext.Provider value={value}>
