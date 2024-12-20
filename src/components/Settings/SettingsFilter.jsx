@@ -3,68 +3,82 @@ import css from "../../styles/Settings/SettingsFilter.module.css";
 import { useAppContext } from "../../context/AppContext";
 
 const SettingsFilter = () => {
-    const { theme, chosenColor, minSalaryFilter, setMinSalaryFilter, batchFilter, setBatchFilter } = useAppContext();
+    const {
+        currentTheme,
+        highlightColor,
+        salaryThreshold,
+        setSalaryThreshold,
+        batchPreference,
+        setBatchPreference,
+    } = useAppContext(); // Updated variable names
+
+    const isDarkMode = currentTheme === 'dark';
 
     const handleSliderChange = (event) => {
         const newValue = Number(event.target.value);
-        setMinSalaryFilter(newValue);
+        setSalaryThreshold(newValue);
     };
 
     const handleInputChange = (event) => {
         const newValue = event.target.value === "" ? 0 : Number(event.target.value);
-        if (newValue > 50) {
-            return 50;
-        }
-        setMinSalaryFilter(newValue);
+        if (newValue > 50) return; // Ensure max limit is not exceeded
+        setSalaryThreshold(newValue);
     };
 
-    const percentage = (minSalaryFilter / 50) * 100;
+    const percentage = (salaryThreshold / 50) * 100;
 
     const sliderStyle = {
-        '--accent-color': chosenColor,
-        '--value': `${percentage}%`
+        '--accent-color': highlightColor,
+        '--value': `${percentage}%`,
     };
 
     const handleBatchSelection = (newBatch) => {
-        setBatchFilter(newBatch);
-    }
+        setBatchPreference(newBatch);
+    };
 
     return (
         <div>
-            <h3 className={`${css.titleHeader} ${theme === 'dark' ? css.themeDark : ''}`}>Post Filter</h3>
+            <h3 className={`${css.titleHeader} ${isDarkMode ? css.themeDark : ''}`}>Post Filter</h3>
             <p className={css.subtitleHeader}>Filter posts according to your preferences.</p>
+
             <div className={css.postFilterWrapper} style={sliderStyle}>
+                {/* Minimum CTC Filter */}
                 <div className={css.postFilterContainer}>
-                    <div className={`${css.postLabelDesc} ${theme === 'dark' ? css.themeDark : ''}`}>Minimum CTC (Per Annum)</div>
+                    <div className={`${css.postLabelDesc} ${isDarkMode ? css.themeDark : ''}`}>
+                        Minimum CTC (Per Annum)
+                    </div>
                     <div className={css.sliderWrapper}>
                         <input
                             type="range"
                             min="0"
-                            max="50"  // Set max limit to 50
-                            value={minSalaryFilter}
+                            max="50"
+                            value={salaryThreshold}
                             className={css.inputRangeSlider}
-                            id="myRange"
                             onChange={handleSliderChange}
                         />
                         <input
                             type="number"
-                            min="0"  // Set min limit to 0
-                            max="50"  // Set max limit to 50
-                            value={minSalaryFilter}
-                            className={`${css.inputRangeText} ${theme === 'dark' ? css.themeDark : ''}`}
+                            min="0"
+                            max="50"
+                            value={salaryThreshold}
+                            className={`${css.inputRangeText} ${isDarkMode ? css.themeDark : ''}`}
                             onChange={handleInputChange}
                         />
                     </div>
                 </div>
 
+                {/* Preferred Batch Filter */}
                 <div className={css.postFilterContainer}>
-                    <div className={`${css.postLabelDesc} ${theme === 'dark' ? css.themeDark : ''}`}>Preferred Batch</div>
+                    <div className={`${css.postLabelDesc} ${isDarkMode ? css.themeDark : ''}`}>
+                        Preferred Batch
+                    </div>
                     <div className={css.sliderWrapper}>
-                        <ul className={`${css.batchList} ${theme === 'dark' ? css.themeDark : ''}`}>
-                            {['Any', '2022', '2023', '2024', '2025', '2026'].map(year => (
+                        <ul className={`${css.batchList} ${isDarkMode ? css.themeDark : ''}`}>
+                            {['Any', '2022', '2023', '2024', '2025', '2026'].map((year) => (
                                 <li
                                     key={year}
-                                    className={`${css.batchListItem} ${batchFilter === year ? css.batchSelected : ''} ${theme === 'dark' ? css.themeDark : ''}`}
+                                    className={`${css.batchListItem} ${batchPreference === year ? css.batchSelected : ''
+                                        } ${isDarkMode ? css.themeDark : ''}`}
                                     onClick={() => handleBatchSelection(year)}
                                 >
                                     {year}

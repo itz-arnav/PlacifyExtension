@@ -5,9 +5,15 @@ import HeaderActions from "./HeaderActions";
 import { useAppContext } from "../../context/AppContext";
 
 const Header = () => {
-  const { theme } = useAppContext();
+  const { currentTheme } = useAppContext();
 
-  const containerClassName = `${css.headerContainer} ${theme === 'dark' ? css.darkTheme : ''}`;
+  const containerClassName = [
+    css.headerContainer,
+    currentTheme === 'dark' && css.darkTheme,
+  ]
+    .filter(Boolean)
+    .join(' ');
+
   return (
     <header className={containerClassName}>
       <HeaderCompanyDetails />

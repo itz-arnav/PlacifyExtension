@@ -1,0 +1,92 @@
+.mainPageSearchContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 3px;
+    padding: 1px 10px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #a8a8a889;
+}
+
+.mainPageSearchContainer.darkTheme {
+    border-bottom: 1px solid #303030d7;
+}
+
+.searchContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px 2px;
+    min-width: 250px;
+    gap: 4px;
+    border-radius: 10px;
+    background-color: #f3f3ff;
+}
+
+.searchContainer.darkTheme {
+    background-color: #282828;
+    color: #eee !important;
+}
+
+.searchicon {
+    font-size: 16px;
+}
+
+.searchInput {
+    outline: none;
+    font-size: 14px;
+    min-width: 200px;
+    background: none;
+    padding: 2px 2px;
+    color: #121212;
+}
+
+.searchInput.darkTheme {
+    color: #eee;
+}
+
+
+.selectOption {
+    font-size: 14px;
+    min-width: 150px;
+}
+
+/* Overriding select container height and padding */
+.selectOption__control {
+    height: 20px !important;
+    min-height: 20px !important;
+    padding: 0 !important;
+    line-height: 20px !important;
+}
+
+.selectOption__value-container {
+    padding: 0 !important;
+    height: 20px !important;
+}
+
+.selectOption__single-value {
+    margin: 0 !important;
+    padding: 0 2px !important;
+    line-height: 20px !important;
+}
+
+.selectOption__dropdown-indicator,
+.selectOption__clear-indicator {
+    padding: 0 2px !important;
+    height: 20px !important;
+}
+
+.selectOption__menu {
+    max-height: 100px;
+    /* Adjust according to your needs */
+}
+
+.selectOption.darkTheme {
+    background-color: #171616;
+    color: #fff;
+}
+
+.customOption {
+    align-items: center !important;
+}

@@ -4,47 +4,45 @@ import { useAppContext } from "../../context/AppContext";
 import { FaCheck } from "react-icons/fa";
 
 const SettingsThemeSelector = () => {
-  const { theme, chosenColor, userTheme, setUserTheme } = useAppContext();
+  const { currentTheme, highlightColor, themePreference, setThemePreference } = useAppContext(); // Updated variable names
 
   const handleThemeChange = (newTheme) => {
-    setUserTheme(newTheme);
+    setThemePreference(newTheme);
   };
+
+  const themes = [
+    { id: 'system', label: 'System', image: 'system.png' },
+    { id: 'light', label: 'Light', image: 'light.png' },
+    { id: 'dark', label: 'Dark', image: 'dark.png' },
+  ];
 
   return (
     <div>
-      <h3 className={`${css.titleHeader} ${theme === 'dark' ? css.themeDark : ''}`}>Interface Theme</h3>
+      <h3 className={`${css.titleHeader} ${currentTheme === 'dark' ? css.themeDark : ''}`}>Interface Theme</h3>
       <p className={css.subtitleHeader}>Select or customize your UI theme.</p>
-      <div className={css.themeImageWrapper} style={{ '--accent-color': chosenColor }}>
-        <div className={css.imageContainer} onClick={() => handleThemeChange('system')}>
-          <img src="system.png" alt="system" className={`${css.themeImage} ${userTheme === 'system' ? css.checked : ''}`} />
-          <div className={css.imageDescContainer}>
-            <div className={`${css.selectRadio} ${userTheme === 'system' ? css.radioChecked : ''}`}>
-              <FaCheck className={`${css.checkIcon} ${userTheme === 'system' ? css.iconChecked : ''}`} />
+      <div className={css.themeImageWrapper} style={{ '--accent-color': highlightColor }}>
+        {themes.map((theme) => (
+          <div
+            key={theme.id}
+            className={css.imageContainer}
+            onClick={() => handleThemeChange(theme.id)}
+          >
+            <img
+              src={theme.image}
+              alt={theme.label}
+              className={`${css.themeImage} ${themePreference === theme.id ? css.checked : ''}`}
+            />
+            <div className={css.imageDescContainer}>
+              <div className={`${css.selectRadio} ${themePreference === theme.id ? css.radioChecked : ''}`}>
+                <FaCheck className={`${css.checkIcon} ${themePreference === theme.id ? css.iconChecked : ''}`} />
+              </div>
+              <div className={css.selectText}>{theme.label}</div>
             </div>
-            <div className={css.selectText}>System</div>
           </div>
-        </div>
-        <div className={css.imageContainer} onClick={() => handleThemeChange('light')}>
-          <img src="light.png" alt="light" className={`${css.themeImage} ${userTheme === 'light' ? css.checked : ''}`} />
-          <div className={css.imageDescContainer}>
-            <div className={`${css.selectRadio} ${userTheme === 'light' ? css.radioChecked : ''}`}>
-              <FaCheck className={`${css.checkIcon} ${userTheme === 'light' ? css.iconChecked : ''}`} />
-            </div>
-            <div className={css.selectText}>Light</div>
-          </div>
-        </div>
-        <div className={css.imageContainer} onClick={() => handleThemeChange('dark')}>
-          <img src="dark.png" alt="dark" className={`${css.themeImage} ${userTheme === 'dark' ? css.checked : ''}`} />
-          <div className={css.imageDescContainer}>
-            <div className={`${css.selectRadio} ${userTheme === 'dark' ? css.radioChecked : ''}`}>
-              <FaCheck className={`${css.checkIcon} ${userTheme === 'dark' ? css.iconChecked : ''}`} />
-            </div>
-            <div className={css.selectText}>Dark</div>
-          </div>
-        </div>
+        ))}
       </div>
     </div>
   );
-}
+};
 
 export default SettingsThemeSelector;

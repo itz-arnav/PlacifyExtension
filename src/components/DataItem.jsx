@@ -9,7 +9,7 @@ const DataItem = React.memo(({ item, openInNewTab }) => {
 
   return (
     <div className="data" onClick={() => openInNewTab(item.website)}>
-      <img src={item.imageIcon || 'default_icon.png'} alt={item.name || 'Default Item'} className="img" />
+      <img src={item.imageIcon} alt={item.name || 'Default Item'} className="img" />
       <div className="companyTitle">
         <span className="companyName">{item.company || 'Unknown Company'}</span>
         <span className="companyURL">{item.website || 'No URL'}</span>

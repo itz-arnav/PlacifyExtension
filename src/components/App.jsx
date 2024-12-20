@@ -1,23 +1,25 @@
 import React from 'react';
 import Header from './Header/Header';
+import MainPageSearch from './MainPage/MainPageSearch';
+import ItemList from './MainPage/ItemList';
 import css from '../styles/App.module.css';
 import { useAppContext } from "../context/AppContext";
 
 const App = () => {
-  const { theme } = useAppContext();
+  const { currentTheme } = useAppContext();
 
-  // Determine the class names based on the theme
-  const containerClassName = `${css.homeContainer} ${theme === 'dark' ? css.darkTheme : ''}`;
+  const containerClass = [
+    css.homeContainer,
+    currentTheme === 'dark' ? css.darkTheme : '',
+  ].join(' ').trim();
 
   return (
-    <div className={containerClassName}>
+    <div className={containerClass}>
       <Header />
-
-      {/* TAB */}
-
-      {/* ITEMLIST */}
+      <MainPageSearch />
+      <ItemList />
     </div>
   );
-}
+};
 
 export default App;

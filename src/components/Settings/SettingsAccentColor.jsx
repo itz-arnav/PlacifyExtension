@@ -1,9 +1,11 @@
-import React from 'react'
+/* global chrome */
+
+import React from 'react';
 import { useAppContext } from "../../context/AppContext";
 import css from "../../styles/Settings/SettingsAccentColor.module.css";
 
 const SettingsAccentColor = () => {
-    const { theme, chosenColor, setChosenColor } = useAppContext();
+    const { currentTheme, highlightColor, setHighlightColor } = useAppContext(); // Updated variable names
     const colors = [
         '#31cb00', // Green
         '#09bc8a', // Teal
@@ -13,32 +15,39 @@ const SettingsAccentColor = () => {
         '#e63946', // Red
         '#ff006e', // Pink
         '#ffd500', // Yellow
-        '#ff8800'  // Orange
+        '#ff8800', // Orange
     ];
+
     const handleRadioChange = (color) => {
-        setChosenColor(color);
-        localStorage.setItem('color', color);
+        setHighlightColor(color);
+        chrome.storage.sync.set({ chosenColor: color }); // Updated to use `chrome.storage`
     };
-    const themeColor = theme === 'dark' ? "#171616" : "#fff";
+
+    const containerThemeClass = currentTheme === 'dark' ? css.themeDark : '';
+
     return (
         <div>
-            <h3 className={`${css.titleHeader} ${theme === 'dark' ? css.themeDark : ''}`}>Accent Color</h3>
-            <p className={css.subtitleHeader}>Update your extension to a brand new color.</p>
+            <h3 className={`${css.titleHeader} ${containerThemeClass}`}>Accent Color</h3>
+            <p className={css.subtitleHeader}>Update your extension to a brand-new color.</p>
             <div className={css.radioContainer}>
-                {colors.map(color => (
-                    <label key={color} style={{ '--current-color': color }} className={css.radioLabel}>
+                {colors.map((color) => (
+                    <label
+                        key={color}
+                        style={{ '--current-color': color }}
+                        className={css.radioLabel}
+                    >
                         <input
                             type="radio"
                             name="choice"
                             className={css.radioInput}
-                            checked={chosenColor === color}
+                            checked={highlightColor === color}
                             onChange={() => handleRadioChange(color)}
                         />
                     </label>
                 ))}
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default SettingsAccentColor
+export default SettingsAccentColor;

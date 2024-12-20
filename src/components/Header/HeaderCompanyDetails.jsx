@@ -4,12 +4,22 @@ import css from "../../styles/Header/HeaderCompanyDetails.module.css";
 import { useAppContext } from "../../context/AppContext";
 
 const HeaderCompanyDetails = () => {
-  const { theme } = useAppContext();
+  const { currentTheme } = useAppContext();
 
-  // Determine classes based on theme
-  const containerClass = `${css.placifyDetailsContainer} ${theme === 'dark' ? css.darkTheme : ''}`;
-  const iconClass = `${css.placifyHeaderIcon}`;
-  const textClass = `${css.placifyCompanyName} ${theme === 'dark' ? css.darkTheme : ''}`;
+  // Define dynamic styles and classes
+  const containerClass = [
+    css.placifyDetailsContainer,
+    currentTheme === 'dark' && css.darkTheme,
+  ]
+    .filter(Boolean)
+    .join(' ');
+
+  const textClass = [
+    css.placifyCompanyName,
+    currentTheme === 'dark' && css.darkTheme,
+  ]
+    .filter(Boolean)
+    .join(' ');
 
   const handleOpenWebsite = () => {
     chrome.tabs.create({ url: "https://www.google.com" });
@@ -17,7 +27,11 @@ const HeaderCompanyDetails = () => {
 
   return (
     <div className={containerClass} onClick={handleOpenWebsite} style={{ cursor: "pointer" }}>
-      <img src="placify_icon.png" alt="Placify Logo" className={iconClass} />
+      <img
+        src="placify_icon.png"
+        alt="Placify Logo"
+        className={css.placifyHeaderIcon}
+      />
       <span className={textClass}>Placify</span>
     </div>
   );

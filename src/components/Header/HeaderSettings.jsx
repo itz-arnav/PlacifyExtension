@@ -1,29 +1,34 @@
 import React, { useState } from "react";
 import { CiSettings } from "react-icons/ci";
 import { Dialog, DialogTrigger } from "../../components/ui/dialog";
-import SettingsDialog from "../Settings/SettingsDialog"; // Import the new SettingsDialog component
-import css from "../../styles/Header/HeaderSettings.module.css"; // Ensure the path is correct, also remove double slashes
-import { useAppContext } from "../../context/AppContext"; // Import the theme context
+import SettingsDialog from "../Settings/SettingsDialog";
+import css from "../../styles/Header/HeaderSettings.module.css";
+import { useAppContext } from "../../context/AppContext";
 
 const HeaderSettings = () => {
-  const { theme } = useAppContext(); // Assuming theme is stored in this context
-  const [isOpen, setIsOpen] = useState(false);
-  const isDarkMode = theme === 'dark'; // Check if the current theme is 'dark'
- 
+  const { currentTheme } = useAppContext(); // Updated to use `currentTheme` from AppContext
+  const [isDialogOpen, setDialogOpen] = useState(false);
+  const isDarkMode = currentTheme === 'dark';
+
   return (
     <div className="relative">
-      <Dialog open={isOpen} onOpenChange={setIsOpen} className={css.dialogContainer}>
-        {/* Trigger to open the dialog */}
+      <Dialog open={isDialogOpen} onOpenChange={setDialogOpen} className={css.dialogContainer}>
+        {/* Icon to trigger the dialog */}
         <DialogTrigger asChild>
           <CiSettings
-            className={`${css.settingsIcon} ${isDarkMode ? css.darkTheme : ''}`}
+            className={[
+              css.settingsIcon,
+              isDarkMode && css.darkTheme,
+            ]
+              .filter(Boolean)
+              .join(' ')}
             size={24}
-            onClick={() => setIsOpen(true)}
+            onClick={() => setDialogOpen(true)}
           />
         </DialogTrigger>
 
         {/* Settings Dialog Component */}
-        <SettingsDialog isOpen={isOpen} onOpenChange={setIsOpen} />
+        <SettingsDialog isOpen={isDialogOpen} onOpenChange={setDialogOpen} />
       </Dialog>
     </div>
   );

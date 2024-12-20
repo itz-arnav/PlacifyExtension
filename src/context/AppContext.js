@@ -1,119 +1,172 @@
+/* global chrome */
+
 import React, { createContext, useContext, useState, useEffect, useMemo } from 'react';
+import sampleData from '../assets/sampleItemData';
 
 const AppContext = createContext(undefined);
 
 export const AppProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(true);
-  const [userData, setUserData] = useState(null);
-  // Initialize 'theme' directly from local storage or default to 'light'
-  const [theme, setTheme] = useState(() => localStorage.getItem('theme') || 'light');
-  const [chosenColor, setChosenColor] = useState(() => localStorage.getItem('chosenColor') || '#8338ec');
-  // Initialize 'userTheme' from local storage or default to 'system'
-  const [userTheme, setUserTheme] = useState(() => localStorage.getItem('userTheme') || theme);
-  // For filters related to job posts
-  const [minSalaryFilter, setMinSalaryFilter] = useState(() => localStorage.getItem('minSalaryFilter') || 0);
-  const [batchFilter, setBatchFilter] = useState(() => localStorage.getItem('batchFilter') || 'Any');
+  const [items, setItems] = useState(sampleData);
+  const [filteredItems, setFilteredItems] = useState(items);
 
-  // Fetch user data from an API
+  const [currentTheme, setCurrentTheme] = useState('light');
+  const [highlightColor, setHighlightColor] = useState('#8338ec');
+  const [themePreference, setThemePreference] = useState('system');
+
+  const [salaryThreshold, setSalaryThreshold] = useState(0);
+  const [batchPreference, setBatchPreference] = useState('Any');
+  const [itemCategory, setItemCategory] = useState('Job');
+  const [searchQuery, setSearchQuery] = useState('');
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await fetch('https://placify-backend.vercel.app/api/posts/');
         const data = await response.json();
-        setUserData(data);
+        setItems(data.items);
       } catch (error) {
         console.error('Failed to fetch user data:', error);
       } finally {
         setIsLoading(false);
+        setItems(sampleData);
       }
     };
     fetchData();
   }, []);
 
-  // Save the theme and chosen color to local storage whenever they change
   useEffect(() => {
-    localStorage.setItem('theme', theme);
-  }, [theme]);
+    chrome.storage.sync.get(['theme', 'chosenColor', 'themePreference', 'minSalaryFilter', 'batchFilter', 'itemTypeFilter', 'searchTermFilter'], (storedValues) => {
+      setCurrentTheme(storedValues.theme || 'light');
+      setHighlightColor(storedValues.chosenColor || '#8338ec');
+      setThemePreference(storedValues.themePreference || 'system');
+      setSalaryThreshold(storedValues.minSalaryFilter || 0);
+      setBatchPreference(storedValues.batchFilter || 'Any');
+      setItemCategory(storedValues.itemTypeFilter || 'Job');
+      setSearchQuery(storedValues.searchTermFilter || '');
+    });
+  }, []);
 
   useEffect(() => {
-    localStorage.setItem('chosenColor', chosenColor);
-  }, [chosenColor]);
+    chrome.storage.sync.set({ theme: currentTheme });
+  }, [currentTheme]);
 
   useEffect(() => {
-    localStorage.setItem('minSalaryFilter', minSalaryFilter);
-  }, [minSalaryFilter]);
+    chrome.storage.sync.set({ chosenColor: highlightColor });
+  }, [highlightColor]);
 
   useEffect(() => {
-    localStorage.setItem('batchFilter', batchFilter);
-  }, [batchFilter]);
+    chrome.storage.sync.set({ minSalaryFilter: salaryThreshold });
+  }, [salaryThreshold]);
 
-  // Respond to changes in 'userTheme' and adjust 'theme' accordingly
   useEffect(() => {
-    localStorage.setItem('userTheme', userTheme);
+    chrome.storage.sync.set({ batchFilter: batchPreference });
+  }, [batchPreference]);
+
+  useEffect(() => {
+    chrome.storage.sync.set({ itemTypeFilter: itemCategory });
+  }, [itemCategory]);
+
+  useEffect(() => {
+    chrome.storage.sync.set({ searchTermFilter: searchQuery });
+  }, [searchQuery]);
+
+  useEffect(() => {
+    chrome.storage.sync.set({ themePreference: themePreference });
+
     const handleSystemThemeChange = (e) => {
-      if (userTheme === 'system') {
+      if (themePreference === 'system') {
         const newSystemTheme = e.matches ? 'dark' : 'light';
-        setTheme(newSystemTheme);
+        setCurrentTheme(newSystemTheme);
       }
     };
 
-    if (userTheme === 'system') {
-      const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
-      const systemTheme = prefersDarkMode ? 'dark' : 'light';
-      setTheme(systemTheme);
-      const matchMedia = window.matchMedia('(prefers-color-scheme: dark)');
-      matchMedia.addListener(handleSystemThemeChange);
+    if (themePreference === 'system') {
+      const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)');
+      setCurrentTheme(prefersDarkMode.matches ? 'dark' : 'light');
+      prefersDarkMode.addListener(handleSystemThemeChange);
 
       return () => {
-        matchMedia.removeListener(handleSystemThemeChange);
+        prefersDarkMode.removeListener(handleSystemThemeChange);
       };
     } else {
-      setTheme(userTheme);
+      setCurrentTheme(themePreference);
     }
-  }, [userTheme]);
+  }, [themePreference]);
 
-  // Function to toggle the theme between 'light' and 'dark'
   const toggleTheme = () => {
-    if (userTheme === 'system') {
-      setUserTheme(theme === 'light' ? 'dark' : 'light');
-    } else if (userTheme === 'light') {
-      setUserTheme('dark');
+    if (themePreference === 'system') {
+      setThemePreference(currentTheme === 'light' ? 'dark' : 'light');
+    } else if (themePreference === 'light') {
+      setThemePreference('dark');
     } else {
-      setUserTheme('light');
+      setThemePreference('light');
     }
   };
 
-  const resetSettings = () => {
-    setUserTheme('system');
-    setMinSalaryFilter(0);
-    setBatchFilter('Any');
-    setChosenColor('#8338ec');
-  }
+  const resetPreferences = () => {
+    setThemePreference('system');
+    setSalaryThreshold(0);
+    setBatchPreference('Any');
+    setHighlightColor('#8338ec');
+  };
 
-  // Prepare context value with useMemo to optimize performance
-  const value = useMemo(() => ({
-    isLoading,
-    userData,
-    theme,
-    chosenColor,
-    setUserData,
-    setTheme,
-    setChosenColor,
-    toggleTheme,
-    userTheme,
-    setUserTheme,
-    minSalaryFilter,
-    setMinSalaryFilter,
-    batchFilter,
-    setBatchFilter,
-    resetSettings
-  }), [isLoading, userData, theme, chosenColor, userTheme, minSalaryFilter, batchFilter]);
+  const updateFilteredItems = (searchTerm, category = itemCategory) => {
+    if (!items || !Array.isArray(items)) return;
 
-  return (
-    <AppContext.Provider value={value}>
-      {children}
-    </AppContext.Provider>
+    const categoryFilteredItems = items.filter((item) => item.type === category);
+
+    const filteredResults = categoryFilteredItems.filter((item) => {
+      const title = (item.name || '').toLowerCase();
+      const company = (item.company || '').toLowerCase();
+      return (
+        title.includes(searchTerm.toLowerCase()) ||
+        company.includes(searchTerm.toLowerCase())
+      );
+    });
+
+    setFilteredItems(filteredResults);
+  };
+
+  const contextValue = useMemo(
+    () => ({
+      isLoading,
+      items,
+      currentTheme,
+      highlightColor,
+      setItems,
+      setCurrentTheme,
+      setHighlightColor,
+      toggleTheme,
+      themePreference,
+      setThemePreference,
+      salaryThreshold,
+      setSalaryThreshold,
+      batchPreference,
+      setBatchPreference,
+      resetPreferences,
+      updateFilteredItems,
+      filteredItems,
+      itemCategory,
+      setItemCategory,
+      searchQuery,
+      setSearchQuery,
+    }),
+    [
+      isLoading,
+      items,
+      currentTheme,
+      highlightColor,
+      themePreference,
+      salaryThreshold,
+      batchPreference,
+      filteredItems,
+      itemCategory,
+      searchQuery
+    ]
   );
+
+  return <AppContext.Provider value={contextValue}>{children}</AppContext.Provider>;
 };
 
 export const useAppContext = () => {
