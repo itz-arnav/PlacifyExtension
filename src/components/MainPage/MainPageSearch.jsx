@@ -32,41 +32,65 @@ const MainPageSearch = () => {
     );
 
     const customStyles = {
-        control: (base) => ({
-            ...base,
+        control: (provided) => ({
+            ...provided,
             cursor: 'pointer',
+            boxShadow: 'none',
             height: '34px',
-            backgroundColor: isDarkMode ? '#171616' : '#fff',
-            borderColor: `${highlightColor}77`,
+            minHeight: '34px',
+            padding: '0',
+            backgroundColor: isDarkMode ? '#171616' : 'white',
+            color: isDarkMode ? 'white' : 'black',
             width: '200px',
+            border: `1px solid ${highlightColor}77 !important`,
+            userSelect: 'none'
         }),
-        option: (base, state) => ({
-            ...base,
-            color: state.isSelected || state.isFocused ? '#fff' : isDarkMode ? '#fff' : '#000',
+        option: (provided, state) => ({
+            ...provided,
             display: 'flex',
             alignItems: 'center',
+            color: state.isSelected || state.isFocused ? 'white' : isDarkMode ? 'white' : 'black',
             backgroundColor: state.isSelected
-                ? highlightColor
+                ? `${highlightColor} !important`
                 : state.isFocused
-                    ? `${highlightColor}be`
+                    ? `${highlightColor}be !important`
                     : isDarkMode
-                        ? '#242424'
-                        : '#fff',
+                        ? '#242424 !important'
+                        : 'null',
+            cursor: 'pointer',
+            padding: '7px 10px',
+            userSelect: 'none'
         }),
-        singleValue: (base) => ({
-            ...base,
+        singleValue: (provided) => ({
+            ...provided,
             display: 'flex',
             alignItems: 'center',
-            color: isDarkMode ? '#fff' : '#000',
+            marginTop: '-1px',
+            color: isDarkMode ? '#fff' : 'black',
+            userSelect: 'none'
         }),
-        menu: (base) => ({
-            ...base,
-            backgroundColor: isDarkMode ? '#171616' : '#fff',
+        menu: (provided) => ({
+            ...provided,
+            backgroundColor: isDarkMode ? '#171616' : 'white',
+            border: 'none',
+            padding: '0',
+            margin: '0',
+            userSelect: 'none'
+        }),
+        menuList: (provided) => ({
+            ...provided,
+            padding: '0',
+            userSelect: 'none'
+        }),
+        dropdownIndicator: (provided) => ({
+            ...provided,
+            marginTop: '-2px',
+            userSelect: 'none'
         }),
     };
 
     const CustomSingleValue = ({ children, ...props }) => (
-        <components.SingleValue {...props}>
+        <components.SingleValue {...props} className={css.customSingleValue}>
             {props.data.icon}
             <span style={{ marginLeft: '6px' }}>{children}</span>
         </components.SingleValue>
@@ -91,7 +115,7 @@ const MainPageSearch = () => {
 
     useEffect(() => {
         updateFilteredItems(searchQuery, itemCategory);
-    }, [itemCategory, searchQuery]);
+    }, [itemCategory, searchQuery, updateFilteredItems]);
 
     const getClassName = (...classes) => classes.filter(Boolean).join(' ');
 

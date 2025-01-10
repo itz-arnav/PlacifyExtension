@@ -1,0 +1,15 @@
+.settingsIcon {
+    font-size: 32px;
+    padding: 7px;
+    border: 1px solid var(--accent-color);
+    opacity: 0.82;
+    border-radius: 5px;
+    transform: scale(0.98);
+    transition: all 150ms ease-in-out;
+}
+
+.settingsIcon:hover {
+    transform: scale(1);
+    filter: brightness(1.05);
+    opacity: 0.95;
+}

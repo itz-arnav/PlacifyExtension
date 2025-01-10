@@ -1,7 +1,8 @@
 import React from 'react';
 import css from "../../styles/MainPage/DataItem.module.css";
+import DataItemDetailsPopup from './DataItemDetailsPopup';
 import { useAppContext } from "../../context/AppContext";
-import { FaMoneyBillWave, FaExternalLinkAlt, FaEye } from "react-icons/fa";
+import { FaMoneyBillWave, FaExternalLinkAlt } from "react-icons/fa";
 import { MdGroups, MdDateRange, MdAccessTime } from "react-icons/md";
 
 const DataItem = React.memo(({ item, openInNewTab }) => {
@@ -9,8 +10,8 @@ const DataItem = React.memo(({ item, openInNewTab }) => {
 
     const styles = {
         '--accent-color': highlightColor,
-        '--background-color': currentTheme === 'dark' ? '#292a2d' : '#F0F2F6',
-        '--hover-color': currentTheme === 'dark' ? '#373737' : '#ebeef3',
+        '--background-color': currentTheme === 'dark' ? '#26212b' : '#F0F2F6',
+        '--hover-color': currentTheme === 'dark' ? '#322c38' : '#ebeef3',
         '--text-color': currentTheme === 'dark' ? '#cdcdcd' : '#555',
     };
 
@@ -72,11 +73,7 @@ const DataItem = React.memo(({ item, openInNewTab }) => {
                 )}
             </div>
             <div className={css.actionButtons}>
-                <FaEye
-                    className={css.visitButton}
-                    title="View Details"
-                    onClick={() => console.log(`Viewing details of ${item.name}`)}
-                />
+                <DataItemDetailsPopup />
                 <FaExternalLinkAlt
                     className={css.visitButton}
                     title="Visit Link"

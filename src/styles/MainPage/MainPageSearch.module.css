@@ -25,7 +25,8 @@
 }
 
 .searchContainer.darkTheme {
-    background-color: #282828;
+    background-color: #28242c;
+    border: 1px solid #eeeeee19;
     color: #eee !important;
 }
 
@@ -50,6 +51,7 @@
 .selectOption {
     font-size: 14px;
     min-width: 150px;
+    user-select: none !important;
 }
 
 /* Overriding select container height and padding */
@@ -89,4 +91,9 @@
 
 .customOption {
     align-items: center !important;
+    user-select: none !important;
+}
+
+.customSingleValue {
+    user-select: none !important;
 }

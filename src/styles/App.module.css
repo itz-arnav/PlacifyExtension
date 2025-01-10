@@ -7,9 +7,9 @@
     display: flex;
     align-items: center;
     flex-direction: column;
-    border-bottom: 1px solid #323232;
+    border-bottom: 1px solid #181c1c;
 }
 
 .homeContainer.darkTheme {
-    background-color: #202124;
+    background-color: #181c1c;
 }

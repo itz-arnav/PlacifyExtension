@@ -1,6 +1,6 @@
 /* global chrome */
 
-import React, { createContext, useContext, useState, useEffect, useMemo } from 'react';
+import React, { createContext, useContext, useState, useEffect, useMemo, useCallback } from 'react';
 import sampleData from '../assets/sampleItemData';
 
 const AppContext = createContext(undefined);
@@ -94,7 +94,7 @@ export const AppProvider = ({ children }) => {
     }
   }, [themePreference]);
 
-  const toggleTheme = () => {
+  const toggleTheme = useCallback(() => {
     if (themePreference === 'system') {
       setThemePreference(currentTheme === 'light' ? 'dark' : 'light');
     } else if (themePreference === 'light') {
@@ -102,7 +102,7 @@ export const AppProvider = ({ children }) => {
     } else {
       setThemePreference('light');
     }
-  };
+  }, [themePreference, currentTheme]);
 
   const resetPreferences = () => {
     setThemePreference('system');
@@ -111,7 +111,7 @@ export const AppProvider = ({ children }) => {
     setHighlightColor('#8338ec');
   };
 
-  const updateFilteredItems = (searchTerm, category = itemCategory) => {
+  const updateFilteredItems = useCallback((searchTerm, category = itemCategory) => {
     if (!items || !Array.isArray(items)) return;
 
     const categoryFilteredItems = items.filter((item) => item.type === category);
@@ -126,7 +126,7 @@ export const AppProvider = ({ children }) => {
     });
 
     setFilteredItems(filteredResults);
-  };
+  }, [items, itemCategory]);
 
   const contextValue = useMemo(
     () => ({
@@ -162,7 +162,9 @@ export const AppProvider = ({ children }) => {
       batchPreference,
       filteredItems,
       itemCategory,
-      searchQuery
+      searchQuery,
+      toggleTheme,
+      updateFilteredItems
     ]
   );
 
