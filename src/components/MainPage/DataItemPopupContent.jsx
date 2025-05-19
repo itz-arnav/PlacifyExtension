@@ -32,7 +32,7 @@ const DataItemPopupContent = ({ isOpen, setDialogOpen }) => { // Destructured pr
             <DialogHeader className={css.headerHeight}>
                 <DialogTitle className={css.dialogTitle}>Settings</DialogTitle>
                 <DialogDescription className={css.dialogDescription}>
-                    Change the appearance, filters, and job results.
+                    Change the appearance, filters, and job results. V2
                 </DialogDescription>
             </DialogHeader>
 
